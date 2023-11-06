@@ -1,0 +1,14 @@
+CREATE TABLE `la_comanda`.`tipos_empleados` (`id` INT NOT NULL AUTO_INCREMENT , `tipo` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `la_comanda`.`empleados` (`id` INT NOT NULL AUTO_INCREMENT , `usuario` VARCHAR(20) NOT NULL , `clave` VARCHAR(20) NOT NULL , `estado` VARCHAR(20) NOT NULL , `id_tipo` INT NOT NULL , `fecha_logueo` DATETIME NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `la_comanda`.`estados_pedidos` (`id` INT NOT NULL AUTO_INCREMENT , `estado` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+INSERT INTO `estados_pedidos`(`estado`) VALUES ('pendiente'),('en preparacion'),('listo para servir'),('entregado'),('cancelado');
+INSERT INTO `tipos_empleados`(`tipo`) VALUES ('bartender'),('cervecero'),('cocinero'),('mozo'),('socio');
+CREATE TABLE `la_comanda`.`productos` (`id` INT NOT NULL AUTO_INCREMENT , `producto` VARCHAR(20) NULL , `descripcion` VARCHAR(20) NULL , `precio` decimal(6,2) NOT NULL, `categoria` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `productos` ADD `tiempo_preparacion` TIME NOT NULL AFTER `precio`;
+INSERT INTO `productos`(`producto`, `descripcion`, `precio`, `tiempo_preparacion`, `categoria`) VALUES ('milanesa','',700,'01:00:00',3);
+CREATE TABLE `la_comanda`.`mesas` (`cod_mesa` VARCHAR(5) NOT NULL , `foto` VARCHAR(100) NULL , `id_estado` INT NOT NULL , PRIMARY KEY (`cod_mesa`)) ENGINE = InnoDB;
+CREATE TABLE `la_comanda`.`estados_mesas` (`id` INT NOT NULL AUTO_INCREMENT , `estado` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+INSERT INTO `estados_mesas`(`estado`) VALUES ('cliente esperando pedido'),('cliente comiendo'),('cliente pagando'),('cerrada');
+INSERT INTO `mesas`(`cod_mesa`, `foto`, `id_estado`) VALUES ('00100','',4);
+CREATE TABLE `la_comanda`.`pedidos` (`id` INT NOT NULL AUTO_INCREMENT , `cod_pedido` VARCHAR(5) NOT NULL , `cod_mesa` VARCHAR(5) NOT NULL , `id_estado` INT NOT NULL , `id_mozo` INT NOT NULL , `id_empleado` INT NULL , `nombre_cliente` VARCHAR(25) NOT NULL , `id_producto` INT NOT NULL , `fecha_pedido` DATETIME NOT NULL , `tiempo_estimado_preparacion` TIME NULL , `hora_inicio` TIME NULL , `hora_finalizacion` TIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `la_comanda`.`encuestas` (`id` INT NOT NULL AUTO_INCREMENT , `cod_mesa` VARCHAR(5) NOT NULL , `mesa_puntos` INT NOT NULL , `rest_calificacion` INT NOT NULL , `id_mozo` INT NOT NULL , `mozo_puntos` INT NOT NULL , `id_empleado` INT NOT NULL , `emp_puntos` INT NOT NULL , `experiencia` VARCHAR(66) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
