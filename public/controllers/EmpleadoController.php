@@ -14,8 +14,8 @@ class EmpleadoController extends Empleado implements IApiUsable
         $emp->usuario = $parametros['usuario'];
         $emp->clave = $parametros['clave'];
         $emp->fecha_logueo = date("Y-m-d H:i:s");
-        $emp->estado = "activo";
-        $emp->tipo = $parametros['id_tipo'];
+        $emp->estado = Empleado::ACTIVO;
+        $emp->rol = $parametros['rol'];
         $emp->crearEmpleado();
 
         $payload = json_encode(array("mensaje" => "Empleado creado con exito"));
@@ -31,7 +31,7 @@ class EmpleadoController extends Empleado implements IApiUsable
         $usr = $args['usuario'];
         $usuario = Empleado::obtenerEmpleado($usr);
         if( !$usuario ){
-          $payload = json_encode(["aviso"=>"empleado no encontrado"]);
+          $payload = json_encode(["mensaje"=>"empleado no encontrado"]);
         }
         else{
           $payload = json_encode($usuario);
@@ -79,43 +79,5 @@ class EmpleadoController extends Empleado implements IApiUsable
           ->withHeader('Content-Type', 'application/json');
     }
     
-    public function TomarUnPedido($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
-        $idEmp = $parametros['id_emp'];
-        $idPedido = $parametros['id_pedido'];
-        $hora = date('H:i:s');
-        $tiempo = $parametros['tiempo'];
-        Empleado::tomarPedido($idEmp,$idPedido,$tiempo,$hora);
-
-        $payload = json_encode(array("mensaje" => "Pedido asignado con exito"));
-
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
-    public function FinalizarUnPedido($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
-        $idPedido = $parametros['id_pedido'];
-        $estado = $parametros['id_estado'];
-        $hora_fin = $parametros['hora_fin'];
-        Empleado::finalizarPedido($idPedido,$estado,$hora_fin);
-
-        $payload = json_encode(array("mensaje" => "Pedido actualizado con exito"));
-
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-    }
-    public function ListarPedidosPendientes($request, $response, $args)
-    {
-      
-      $lista = Empleado::ListarPedidos($args['tipo']);
-      $payload = json_encode(array("listaPedidos" => $lista));
-
-      $response->getBody()->write($payload);
-      return $response
-        ->withHeader('Content-Type', 'application/json');
-    }
+    
 }

@@ -2,9 +2,9 @@
 
 use Slim\Handlers\Strategies\RequestHandler;
 
-class Logger
+class LoggerMW
 {
-    public static function LogOperacion($request, $response, $next)
+    public static function Login($request, $response, $next)
     {
         $retorno = $next($request, $response);
         return $retorno;

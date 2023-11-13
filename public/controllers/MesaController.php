@@ -2,6 +2,7 @@
 
 require_once './models/Mesa.php';
 require_once './interfaces/IApiUsable.php';
+require_once __DIR__ .'/../models/CodigoUnico.php';
 
 class MesaController extends Mesa {
 
@@ -9,9 +10,9 @@ class MesaController extends Mesa {
         $parametros = $request->getParsedBody();
         // Creamos la mesa
         $mesa = new Mesa();
-        $mesa->cod_mesa = $parametros['cod_mesa'];
+        $mesa->cod_mesa = CrearCodigo();
         $mesa->foto = $parametros['foto'];
-        $mesa->estado = $parametros['id_estado'];
+        $mesa->estado = Mesa::CERRADA;
         $payload = $mesa->CrearMesa();
         $response->getBody()->write($payload);
         return $response

@@ -12,6 +12,7 @@ require_once './controllers/MesaController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/PedidoController.php';
 require_once './db/AccesoDatos.php';
+require_once './middlewares/RolesMW.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -23,7 +24,7 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("hola alumnos de los lunes!");
+    $response->getBody()->write("TP La comanda Progra 3 Romina Calani");
     return $response;
 });
 
@@ -34,13 +35,13 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
     $group->post('[/]', \EmpleadoController::class . ':CargarUno');
     $group->post('/modificar', \EmpleadoController::class . ':ModificarUno');
     $group->delete('/{usuarioId}', \EmpleadoController::class . ':BorrarUno');
-    $group->get('/listar_pedidos/{tipo}', \EmpleadoController::class .':ListarPedidosPendientes');
+    
   });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->get('[/]', \MesaController::class . ':TraerTodos');
   // $group->get('/{usuario}', \MesaController::class . ':TraerUno');
-  $group->post('[/]', \MesaController::class . ':CargarUno');
+  $group->post('[/]', \MesaController::class . ':CargarUno')->add(\RolesMW::class .'::EsSocioMW');
   // $group->post('/modificar', \MesaController::class . ':ModificarUno');
   // $group->delete('/{usuarioId}', \MesaController::class . ':BorrarUno');
 });
@@ -54,9 +55,12 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
   // $group->get('/{usuario}', \MesaController::class . ':TraerUno');
-  $group->post('[/]', \PedidoController::class . ':CargarUno');
+  $group->post('[/]', \PedidoController::class . ':CrearUno')->add(\RolesMW::class .'::EsMozoMW');
   // $group->post('/modificar', \MesaController::class . ':ModificarUno');
   // $group->delete('/{usuarioId}', \MesaController::class . ':BorrarUno');
+  $group->get('/listar/{rol}', \PedidoController::class .':ListarPedidosPendientes');
+  $group->post('/iniciar', \PedidoController::class .':IniciarUnPedido');
+  $group->post('/terminar', \PedidoController::class .':TerminarUnPedido');
 });
 
 // Run app
