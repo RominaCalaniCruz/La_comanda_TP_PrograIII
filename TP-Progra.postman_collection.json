@@ -7,7 +7,544 @@
 	},
 	"item": [
 		{
-			"name": "CrearEmpleado",
+			"name": "Empleado",
+			"item": [
+				{
+					"name": "CrearEmpleado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "usuario",
+									"value": "romina",
+									"type": "text"
+								},
+								{
+									"key": "clave",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/empleados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"empleados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarEmpleado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:666/empleados/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"empleados",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModificarEmpleado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "estado",
+									"value": "suspendido",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/empleados/eliminar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"empleados",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarEmpleados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:666/empleados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"empleados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarUno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:666/empleados/romina",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"empleados",
+								"romina"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mesa",
+			"item": [
+				{
+					"name": "CrearMesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foto",
+									"value": " ",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "socio",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarMesas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:666/mesas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "CrearProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "producto",
+									"value": "fernet con coca",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "...",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "tiempo_preparacion",
+									"value": "00:05:00",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarProductos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:666/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstadoMesas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "CrearPedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA1MjY3OTAsImV4cCI6MTcwMDU4Njc5MCwiYXVkIjoiODdjYTY3ZjJlN2IyMTQ1ZTBjZmQ3N2IyZmQ1ZmQ3MDI3NzQ4ZDA1YyIsImRhdGEiOnsidXN1YXJpbyI6Imp1YW4iLCJyb2wiOiJtb3pvIn0sImFwcCI6IkpXVCBSb21pbmEifQ.REpctr3hmrj-cgcNfUZRVnI7AZZYBKxnsa0LNkMjYVk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cod_mesa\":\"6666\",\r\n    \"nombre_cliente\":\"romina\",\r\n    \"productos\":\r\n    [\r\n    {\r\n        \"id_producto\":\"1\", \r\n        \"cantidad\":2\r\n    },\r\n    {\r\n        \"id_producto\":\"4\", \r\n        \"cantidad\":2\r\n    },\r\n    {\r\n        \"id_producto\":\"5\", \r\n        \"cantidad\":1\r\n    },\r\n    {\r\n        \"id_producto\":\"6\", \r\n        \"cantidad\":1\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TomarPedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA1MzM3ODIsImV4cCI6MTcwMDU5Mzc4MiwiYXVkIjoiODdjYTY3ZjJlN2IyMTQ1ZTBjZmQ3N2IyZmQ1ZmQ3MDI3NzQ4ZDA1YyIsImRhdGEiOnsidXN1YXJpbyI6Impvc2UiLCJyb2wiOiJjb2NpbmVybyJ9LCJhcHAiOiJKV1QgUm9taW5hIn0.2O_JbhBstoSzC0W6ov8nzxZNEk1kgW0yW9M_CuHsXDk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id_pedido",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "tiempo_estimado",
+									"value": "00:30:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/iniciar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TerminarPedido Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id_pedido",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "cocinero",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/terminar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								"terminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarPedidos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA1MzE1NzYsImV4cCI6MTcwMDU5MTU3NiwiYXVkIjoiODdjYTY3ZjJlN2IyMTQ1ZTBjZmQ3N2IyZmQ1ZmQ3MDI3NzQ4ZDA1YyIsImRhdGEiOnsidXN1YXJpbyI6Impvc2UiLCJyb2wiOiJjb2NpbmVybyJ9LCJhcHAiOiJKV1QgUm9taW5hIn0.pwrOlL_zXdCHUdRinOT9nZ01yTZeLwzo_b9hLzFRfr4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarPendientesXSector",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/listar/cocinero",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								"listar",
+								"cocinero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubirFoto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA1MjY3OTAsImV4cCI6MTcwMDU4Njc5MCwiYXVkIjoiODdjYTY3ZjJlN2IyMTQ1ZTBjZmQ3N2IyZmQ1ZmQ3MDI3NzQ4ZDA1YyIsImRhdGEiOnsidXN1YXJpbyI6Imp1YW4iLCJyb2wiOiJtb3pvIn0sImFwcCI6IkpXVCBSb21pbmEifQ.REpctr3hmrj-cgcNfUZRVnI7AZZYBKxnsa0LNkMjYVk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foto_mesa",
+									"type": "file",
+									"src": "/C:/Users/USUARIO/Desktop/Labo3D/ParcialHalloween/client/assets/images/autumn-81856_1280.jpg"
+								},
+								{
+									"key": "cod_pedido",
+									"value": "4yo4G",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/pedidos/subir_foto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"pedidos",
+								"subir_foto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Encuesta",
+			"item": []
+		},
+		{
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -16,343 +553,25 @@
 					"formdata": [
 						{
 							"key": "usuario",
-							"value": "romina",
+							"value": "jose",
 							"type": "text"
 						},
 						{
 							"key": "clave",
-							"value": "1234",
-							"type": "text"
-						},
-						{
-							"key": "id_tipo",
-							"value": "4",
+							"value": "6666",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:666/empleados",
+					"raw": "http://localhost:666/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "666",
 					"path": [
-						"empleados"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "EliminarEmpleado",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:666/empleados/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"empleados",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ModificarEmpleado",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "estado",
-							"value": "suspendido",
-							"type": "text"
-						},
-						{
-							"key": "id",
-							"value": "2",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/empleados/eliminar",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"empleados",
-						"eliminar"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ListarEmpleados",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:666/empleados",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"empleados"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ListarEmp",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:666/empleados/romina",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"empleados",
-						"romina"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CrearMesa",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "cod_mesa",
-							"value": "10011",
-							"type": "text"
-						},
-						{
-							"key": "foto",
-							"value": " ",
-							"type": "text"
-						},
-						{
-							"key": "id_estado",
-							"value": "4",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/mesas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"mesas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ListarMesas",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:666/mesas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"mesas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CrearProducto",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "producto",
-							"value": "fernet con coca",
-							"type": "text"
-						},
-						{
-							"key": "descripcion",
-							"value": "...",
-							"type": "text"
-						},
-						{
-							"key": "precio",
-							"value": "2000",
-							"type": "text"
-						},
-						{
-							"key": "tiempo_preparacion",
-							"value": "00:05:00",
-							"type": "text"
-						},
-						{
-							"key": "categoria",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/productos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"productos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ListarProductos",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:666/productos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"productos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CrearPedido",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "cod_pedido",
-							"value": "a1a1a",
-							"type": "text"
-						},
-						{
-							"key": "cod_mesa",
-							"value": "00100",
-							"type": "text"
-						},
-						{
-							"key": "id_mozo",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "nombre_cliente",
-							"value": "walter",
-							"type": "text"
-						},
-						{
-							"key": "id_producto",
-							"value": "3",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/pedidos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"pedidos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ListarPedidos",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://localhost:666/pedidos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"pedidos"
+						"login"
 					]
 				}
 			},

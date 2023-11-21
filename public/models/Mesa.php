@@ -6,14 +6,12 @@ class Mesa{
     const PAGANDO = "cliente pagando";
     const CERRADA = "mesa cerrada";
     public $cod_mesa;
-    public $foto;
     public $estado;
     public function CrearMesa(){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         try{
-            $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (cod_mesa, foto, estado) VALUES (:cod_mesa, :foto, :estado)");
+            $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (cod_mesa, estado) VALUES (:cod_mesa, :estado)");
             $consulta->bindValue(':cod_mesa', $this->cod_mesa, PDO::PARAM_STR);
-            $consulta->bindValue(':foto', $this->foto, PDO::PARAM_STR);
             $consulta->bindValue(':estado', $this->estado, PDO::PARAM_INT);
             $consulta->execute();
             $salida = json_encode(array("mensaje" => "Mesa creada con exito"));
@@ -29,9 +27,8 @@ class Mesa{
     public static function ListarMesas(){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta(
-            "SELECT mesas.cod_mesa, mesas.foto, estados_mesas.estado
-            FROM mesas
-            JOIN estados_mesas ON mesas.id_estado = estados_mesas.id;");
+            "SELECT mesas.cod_mesa, mesas.estado
+            FROM mesas");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Mesa');
@@ -39,7 +36,7 @@ class Mesa{
     public static function ListarUna($cod_mesa){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta(
-            "SELECT mesas.cod_mesa, mesas.foto, mesas.estado
+            "SELECT mesas.cod_mesa, mesas.estado
             FROM mesas WHERE cod_mesa = :codigo");
         $consulta->bindValue(":codigo",$cod_mesa,PDO::PARAM_STR);
         $consulta->execute();

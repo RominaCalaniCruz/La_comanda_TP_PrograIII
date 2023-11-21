@@ -11,7 +11,6 @@ class MesaController extends Mesa {
         // Creamos la mesa
         $mesa = new Mesa();
         $mesa->cod_mesa = CrearCodigo();
-        $mesa->foto = $parametros['foto'];
         $mesa->estado = Mesa::CERRADA;
         $payload = $mesa->CrearMesa();
         $response->getBody()->write($payload);

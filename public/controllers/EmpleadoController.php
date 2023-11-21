@@ -1,6 +1,7 @@
 <?php
 require_once './models/Empleado.php';
 require_once './interfaces/IApiUsable.php';
+require_once __DIR__ . '/../middlewares/AutentificadorJWT.php';
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 
@@ -79,5 +80,22 @@ class EmpleadoController extends Empleado implements IApiUsable
           ->withHeader('Content-Type', 'application/json');
     }
     
+    public static function Login($request, $response, $args){
+      $parametros = $request->getParsedBody();
+      $usuario = $parametros['usuario'];
+      $clave = $parametros['clave'];
+      $empleadoLogeado = Empleado::obtenerEmpleado($usuario);
+      if($empleadoLogeado->clave == $clave && $empleadoLogeado->estado == Empleado::ACTIVO){
+          $token = AutentificadorJWT::CrearToken(array('usuario'=>$usuario, 'rol'=>$empleadoLogeado->rol));
+          $payload = json_encode(array('token'=> $token));
+      }else{
+        $payload = json_encode(array('error'=> 'usuario o contraseña incorrectos'));
+
+      }
+      
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
+    }
     
 }

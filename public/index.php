@@ -20,6 +20,7 @@ $dotenv->load();
 $app = AppFactory::create();
 // $app->setBasePath('/public');
 $app->addRoutingMiddleware();
+$app->addBodyParsingMiddleware();
 
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
@@ -56,12 +57,15 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidoController::class . ':TraerTodos');
   // $group->get('/{usuario}', \MesaController::class . ':TraerUno');
   $group->post('[/]', \PedidoController::class . ':CrearUno')->add(\RolesMW::class .'::EsMozoMW');
+  $group->post('/subir_foto', \PedidoController::class . ':SubirFotoMesa')->add(\RolesMW::class .'::EsMozoMW');
   // $group->post('/modificar', \MesaController::class . ':ModificarUno');
   // $group->delete('/{usuarioId}', \MesaController::class . ':BorrarUno');
-  $group->get('/listar/{rol}', \PedidoController::class .':ListarPedidosPendientes');
+  $group->get('/listar', \PedidoController::class .':ListarPedidosPendientes');
   $group->post('/iniciar', \PedidoController::class .':IniciarUnPedido');
   $group->post('/terminar', \PedidoController::class .':TerminarUnPedido');
 });
+
+$app->post('/login', \EmpleadoController::class .':Login');
 
 // Run app
 $app->run();
