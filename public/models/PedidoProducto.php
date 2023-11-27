@@ -30,32 +30,34 @@ class PedidoProducto{
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
-    public static function finalizarPedidoProducto($idProd,$cod_pedido){
+    public static function finalizarPedidoProducto($id){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("UPDATE pedido_producto SET estado = :estado WHERE cod_pedido=:cod AND id_producto=:idProd");
-        $estado = "listo";
+        $consulta = $objAccesoDatos->prepararConsulta("UPDATE pedido_producto SET estado = :estado WHERE id=:id");
+        $estado = "listo para servir";
         $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
-        $consulta->bindValue(':idProd', $idProd, PDO::PARAM_INT);
-        $consulta->bindValue(':cod', $cod_pedido, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
     }
 
-    public static function verEstadoGrupal($cod_pedido){
+    public static function verEstadoGrupal($cod_pedido,$estado){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT COUNT(*) AS veces_aparece FROM pedido_producto GROUP BY cod_pedido=:cod_pedido");
-        $consulta->bindValue(':cod_pedido', $cod_pedido, PDO::PARAM_STR);
-        $consulta->execute();
-        var_dump($consulta->fetchColumn());
-        $totalProductos = $consulta->fetchColumn();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT COUNT(*) AS veces_pendiente
+
+        $consultaTotal = $objAccesoDatos->prepararConsulta("SELECT COUNT(*) AS veces_aparece FROM pedido_producto WHERE cod_pedido =:cod_pedido GROUP BY cod_pedido");
+        $consultaTotal->bindValue(':cod_pedido', $cod_pedido, PDO::PARAM_STR);
+        $consultaTotal->execute();
+        $totalProductos = $consultaTotal->fetchColumn();
+        var_dump($totalProductos);
+
+        $consultaPendientes = $objAccesoDatos->prepararConsulta("SELECT COUNT(*) AS veces_aparece
         FROM pedido_producto
-        WHERE pedido_producto.estado = 'en preparacion'
-        GROUP BY pedido_producto.cod_pedido=:cod_pedido");
-        $consulta->bindValue(':cod_pedido', $cod_pedido, PDO::PARAM_STR);
-        $consulta->execute();
-        var_dump($consulta->fetchColumn());
-        $totalProductosIguales = $consulta->fetchColumn();
-        return $totalProductosIguales==$totalProductos;
+        WHERE pedido_producto.estado = :estado AND pedido_producto.cod_pedido = :cod_pedido
+        GROUP BY pedido_producto.cod_pedido");
+        $consultaPendientes->bindValue(':cod_pedido', $cod_pedido, PDO::PARAM_STR);
+        $consultaPendientes->bindValue(':estado', $estado, PDO::PARAM_STR);
+        $consultaPendientes->execute();
+        $totalPendientes = $consultaPendientes->fetchColumn();
+        var_dump($totalPendientes);
+        return ($totalPendientes==$totalProductos);
     }
     public static function traerCodxId($id){
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
@@ -63,5 +65,27 @@ class PedidoProducto{
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetchColumn();
+    }
+    public static function CalcularImporteFinal($cod_pedido){
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT pp.cod_pedido, SUM(precio * cantidad) AS importeFinal
+        FROM pedido_producto pp
+        JOIN productos p ON pp.id_producto = p.id
+        WHERE pp.cod_pedido = :cod_pedido
+        GROUP BY pp.cod_pedido");
+        $consulta->bindValue(':cod_pedido', $cod_pedido, PDO::PARAM_STR);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function VerificarRolConPedidoProd($id,$rol){
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT pp.id , e.rol
+        FROM pedido_producto pp
+        JOIN empleados e ON pp.id_empleado = e.id
+        WHERE e.rol = :rol AND pp.id = :id");
+        $consulta->bindValue(':rol', $rol, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 }

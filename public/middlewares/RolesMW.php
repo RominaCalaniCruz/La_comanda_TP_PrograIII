@@ -9,42 +9,10 @@ class RolesMW
 {
     public static function EsSocioMW($request, $handler)
     {
-        // $parametros = $request->getParsedBody();
-        // $sector = $parametros['sector'];
-        // if($sector == Roles::SOCIO){
-        //     $response = $handler->handle($request);
-        // }
-        // else{
-        //     $response = new Response();
-        //     $payload = json_encode(['mensaje'=>'no eres socio']);
-        //     $response->getBody()->write($payload);
-        // }
         return self::VerificarTipoRol($request,$handler,Roles::SOCIO,"No eres socio");
     }
     public static function EsMozoMW($request, $handler)
     {
-        // $header = $request->getHeaderLine('Authorization');
-        // $token = trim(explode("Bearer", $header)[1]);
-        // // try {
-        //     AutentificadorJWT::VerificarToken($token);
-        //     $data = AutentificadorJWT::ObtenerData($token);
-        //     if($data->rol == "mozo")
-        //     {
-        //         $request->datosToken = $data;
-        //         $response = $handler->handle($request);
-        //     }
-        //     else{
-        //         $response = new Response();
-        //         $payload = json_encode(['mensaje' => "no eres"]);
-        //         $response->getBody()->write($payload);
-        //     }
-        // } catch (Exception $e) {
-        //     // $data = AutentificadorJWT::ObtenerData($token);
-        //     $response = new Response();
-        //     $payload = json_encode(['mensaje' => 'no eres mozo']);
-        //     $response->getBody()->write($payload);
-        // }
-        // return $response->withHeader('Content-Type', 'application/json');
         return self::VerificarTipoRol($request,$handler,Roles::MOZO,"No eres mozo");
     }
     public static function EsCocineroMW($request, $handler){
@@ -62,10 +30,10 @@ class RolesMW
 
     public static function VerificarTipoRol($request, $handler, $rol, $mensajeError)
     {
-        
-        $header = $request->getHeaderLine('Authorization');
-        $token = trim(explode("Bearer", $header)[1]);
         try {
+            
+            $header = $request->getHeaderLine('Authorization');
+            $token = trim(explode("Bearer", $header)[1]);
             AutentificadorJWT::VerificarToken($token);
             $data = AutentificadorJWT::ObtenerData($token);
             if($data->rol == $rol)

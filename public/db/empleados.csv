@@ -1,0 +1,8 @@
+id,usuario,clave,estado,rol,fecha_logueo
+5,romina,1234,activo,socio,"2023-11-13 12:40:09"
+6,juan,5555,suspendido,mozo,"2023-11-13 17:06:37"
+7,jose,6666,activo,cocinero,"2023-11-13 17:07:02"
+8,keyla,333,activo,cervecero,"2023-11-21 03:47:06"
+9,franco,111,activo,bartender,"2023-11-21 03:49:37"
+20,martha,002200,activo,"candy bar","2023-11-27 11:41:31"
+21,luis,2525,activo,socio,"2023-11-27 11:42:19"
